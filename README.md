@@ -2,6 +2,15 @@
 
 Fashionpedia is a new dataset which consists of two parts: (1) an ontology built by fashion experts containing 27 main apparel categories, 19 apparel parts, 294 fine-grained attributes and their relationships; (2) a dataset with everyday and celebrity event fashion images annotated with segmentation masks and their associated per-mask fine-grained attributes, built upon the Fashionpedia ontology.
 
+
+
+Find out more information about Fashionpedia at below links:
+
+- [Fashionpedia python API](<https://github.com/KMnP/fashionpedia-api>)  for reading, visualizing annotations, and result evaluation
+- [Fashionpedia project page](<https://fashionpedia.github.io/home/index.html>)
+
+
+
 ## Download
 
 CVDF hosts the images and annotations in the Fashionpedia dataset.  
@@ -13,15 +22,25 @@ CVDF hosts the images and annotations in the Fashionpedia dataset.
 
 ### Annotations
 
-- [instances_attributes_train2020](https://s3.amazonaws.com/ifashionist-dataset/instances_attributes_train2020.json)
-- [instances_attributes_val2020](https://s3.amazonaws.com/ifashionist-dataset/instances_attributes_val2020.json)
-- [test_image_info2020](https://s3.amazonaws.com/ifashionist-dataset/info_test2020.json)
+**Detection: apparel object instance segmentation with localized attributes prediction:**
+
+- [instances_attributes_train2020](https://s3.amazonaws.com/ifashionist-dataset/annotations/instances_attributes_train2020.json)
+- [instances_attributes_val2020](https://s3.amazonaws.com/ifashionist-dataset/annotations/instances_attributes_val2020.json)
+- [test_images_info2020](https://s3.amazonaws.com/ifashionist-dataset/annotations/info_test2020.json)
+
+**Global attributes prediction**:
+
+- [attributes_train2020](https://s3.amazonaws.com/ifashionist-dataset/annotations/attributes_train2020.json)
+- [attributes_val2020](https://s3.amazonaws.com/ifashionist-dataset/annotations/attributes_val2020.json)
+- test_images_info2020: same as detection task
 
 
 
 ## Annotation format
 
 We follow the annotation format of the [COCO dataset](http://mscoco.org/dataset/#download) with additonal fields, such as attributes. The annotations are stored in the [JSON format](http://www.json.org/) and are organized as follows:
+
+### Detection task (instances_attributes)
 
 ```
 {
@@ -92,10 +111,22 @@ license{
 
 
 
-## More information
+### Global attribute prediction task (attributes)
 
-Check out more information about Fashionpedia below:
+```
+{
+ "info": info,
+ "attributes": [attribute],
+ "images": [image],
+ "annotations": [annotation],
+ "licenses": [license]
+}
 
-- [Fashionpedia python API](<https://github.com/KMnP/fashionpedia-api>)  for reading, visualizing annotations, and result evaluation
-- [Fashionpedia project page](<https://fashionpedia.github.io/home/index.html>)
+annotation{
+  "image_id" : int,
+  "attribute_ids": [int],
+}
+
+# other fields follow the same format as detection task
+```
 
